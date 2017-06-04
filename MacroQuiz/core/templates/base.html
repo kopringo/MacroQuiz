@@ -1,0 +1,102 @@
+{% load static %}{% load i18n %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+	{% block css %}{% endblock %}
+	{% block js %}{% endblock %}
+	{% block extrahead %}{% endblock %}
+	
+    <!-- Le styles -->
+    <link href="{% static 'bootstrap/dist/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script type="text/javascript" src='{% static 'jquery/jquery.js' %}'></script>
+    
+	<script src="{% static "bootstrap/dist/js/bootstrap.min.js" %}"></script>
+	<script src="{% static "js/script.js" %}"></script>
+	<style>
+		header{
+			border-bottom: 1px solid #e4e4e4 !important;
+		}
+	</style>
+  </head>
+
+  <body data-spy="scroll" data-target=".subnav" data-offset="50">
+
+	<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+	  <div class="container">
+	    <div class="navbar-header">
+	      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a href="../" class="navbar-brand">GenealogyViewer</a>
+	    </div>
+	    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+	      <ul class="nav navbar-nav">
+	          
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	      	{% if tree_slug %}
+	        <li class="<?if($this->action == 'index'){?>active<?}?>">
+			  	<a href="{% url "home" tree_slug %}">Wprowadzenie</a>
+			  </li>
+			  <li class="<?if(in_array($this->action, array('person-list', 'person-view'))){?>active<?}?>">
+			    <a href="{% url "person_list" tree_slug %}">Osoby</a>
+			  </li>
+			  <li class="<?if($this->action == 'family-list'){?>active<?}?>">
+			    <a href="{% url "family_list" tree_slug %}">Rodziny</a>
+			  </li>
+			  <li class="{% if action == "branch_list" %}active{% endif %}">
+			    <a href="{% url "branch_list" tree_slug %}">Gałęzie</a>
+			  </li>
+			  {% if request.user.is_authenticated %}
+			  <li class="{% if action == "manager" %}active{% endif %}">
+			    <a href="{% url "manager" tree_slug %}" class="text-danger">Manager</a>
+			  </li>
+			  <li class="">
+			    <a href="" class="text-danger">Logout</a>
+			  </li>
+			  {% else %}
+			  <li class="">
+			    <a href="">Sign in</a>
+			  </li>
+			  {% endif %}
+			  
+			  <!-- 
+			  <li  class="<?if($this->action == 'doc-list'){?>active<?}?>">
+			    <a href="<?=$this->baseurl?>/doc-list">Metryki</a>
+			  </li>
+			   -->
+			{% endif %}
+	      </ul>
+	    </nav>
+	  </div>
+	</header>
+
+	<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+	{% block content %}
+	
+	{% endblock %}
+	<!--Body content-->
+    </div>
+  </div>
+</div>
+	
+	
+  </body>
+</html>

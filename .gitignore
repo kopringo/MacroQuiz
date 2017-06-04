@@ -1,1 +1,6 @@
 .virtualenv
+.settings
+*.pyc
+.project
+.pydevproject
+db.sqlite3
