@@ -4,6 +4,9 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
+
 # Create your models here.
 
 ANSWER_MODE = (
@@ -20,7 +23,15 @@ class Language(models.Model):
     
 class Question(models.Model):
     photo1 = models.ImageField(upload_to='var/upload')
+    photo1_thumb = ImageSpecField(source='photo1',
+                                      processors=[ResizeToFill(600, 450)],
+                                      format='JPEG',
+                                      options={'quality': 100})
     photo2 = models.ImageField(upload_to='var/upload')
+    photo2_thumb = ImageSpecField(source='photo2',
+                                      processors=[ResizeToFill(600, 450)],
+                                      format='JPEG',
+                                      options={'quality': 100})
     date = models.DateTimeField()
     owner = models.ForeignKey(User)
     
