@@ -1,0 +1,7 @@
+Django==1.9.4
+django-bower==5.0.4
+MySQL-python
+django-bootstrap-form
+requests
+django-imagekit
+Pillow
