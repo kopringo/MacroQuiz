@@ -4,3 +4,5 @@
 .project
 .pydevproject
 db.sqlite3
+var/upload/*
+!/var/upload/.gitkeep
