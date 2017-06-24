@@ -6,3 +6,4 @@
 db.sqlite3
 var/upload/*
 !/var/upload/.gitkeep
+var/test
