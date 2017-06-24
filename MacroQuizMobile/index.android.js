@@ -23,7 +23,22 @@ export default class MacroQuizMobile extends Component {
 		Alert.alert('on Press!');
 		}
 	
+	load_img(){
+		fetch('https://mquiz.tools37.com/')
+	      .then((response) => response.json())
+	      .then((responseJson) => {
+	        Alert.alert(responseJson.file);
+	      })
+	      .catch((error) => {
+	    	  console.error(error)
+	      });
+		
+		
+	}
+	
   render() { 
+	  this.load_img();
+  
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
